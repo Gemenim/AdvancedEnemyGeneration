@@ -8,7 +8,6 @@ public class GeneratorEnemy : MonoBehaviour
     [SerializeField] private float _cooldown;
 
     private Target _target;
-    private Transform _targetTransform;
     private bool _isActiv = false;
     private float _speedEnemy = 2.0f;
 
@@ -25,8 +24,7 @@ public class GeneratorEnemy : MonoBehaviour
     }
 
     private void Start()
-    {
-        _targetTransform = _target.GetComponent<Transform>();        
+    {      
         var creatEnemyJob = CreatEnemy();
         StartCoroutine(creatEnemyJob);
     }
@@ -38,7 +36,7 @@ public class GeneratorEnemy : MonoBehaviour
             if (_isActiv)
             {
                 var newEnemy = Instantiate(_enemy, transform.position, Quaternion.identity);
-                newEnemy.SetDirection(_targetTransform, _speedEnemy);
+                newEnemy.SetDirection(_target.transform, _speedEnemy);
                 _isActiv = false;
             }
 
