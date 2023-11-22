@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class ActivityAuditor : MonoBehaviour
 {
-    [SerializeField] private GameObject _targetsArray;
+    [SerializeField] private Transform _targetsArray;
 
-    private GeneratorEnemy[] _enemyGenerator;
+    private EnemyGenerator[] _enemyGenerator;
     private Target[] _targets;
     private float _cooldown = 2;
 
     private void Awake()
     {
-        _enemyGenerator = GetComponentsInChildren<GeneratorEnemy>();
+        _enemyGenerator = GetComponentsInChildren<EnemyGenerator>();
         _targets = _targetsArray.GetComponentsInChildren<Target>();
         SetTargets();
     }
@@ -27,9 +27,7 @@ public class ActivityAuditor : MonoBehaviour
     private void SetTargets()
     {
         for (int i = 0; i < _enemyGenerator.Length; i++)
-        {
             _enemyGenerator[i].SetTarget(_targets[i]);
-        }
     }
 
     private IEnumerator ChooseSpawner()
@@ -51,7 +49,7 @@ public class ActivityAuditor : MonoBehaviour
     {
         bool isVerified = true;
 
-        foreach (GeneratorEnemy enemyGenerator in _enemyGenerator)
+        foreach (EnemyGenerator enemyGenerator in _enemyGenerator)
         {
             if (enemyGenerator.IsActiv)
             {
